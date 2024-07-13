@@ -1,5 +1,8 @@
 {
     "app_name":"default",
     "jwtPrivateKey":"jwtPrivateKey",
-    "jwtMaxAge":86400
+    "jwtMaxAge":86400,
+    "mongodb":{
+        "url":"mongodb://127.0.0.1:27017/godance"
+    }
 }
