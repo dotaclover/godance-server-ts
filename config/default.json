@@ -1,3 +1,4 @@
 {
-    "app_name":"default"
+    "app_name":"default",
+    "jwtPrivateKey":"jwtPrivateKey"
 }
