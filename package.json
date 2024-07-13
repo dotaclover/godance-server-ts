@@ -30,6 +30,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon index.ts",
+    "build": "tsc --build --clean && tsc",
     "test": "jest"
   },
   "keywords": [],

@@ -1,2 +1,2 @@
-import mongo from "../services/mongo";
+import mongo from "../services/mongo/database";
 mongo.connect();
