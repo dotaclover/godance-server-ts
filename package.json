@@ -6,6 +6,8 @@
   "dependencies": {
     "config": "^3.3.12",
     "express": "^4.19.2",
+    "express-async-error": "^0.0.2",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
