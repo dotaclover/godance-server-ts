@@ -10,6 +10,8 @@ export default function (req: Request, res: Response, next: NextFunction) {
     req.user = decoded as User;
     next();
   } catch (ex) {
+    if (ex instanceof Error)
+      return res.status(400).send(ex.message);
     res.status(400).send("Invalid token.");
   }
 }

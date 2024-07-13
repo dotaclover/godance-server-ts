@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const config = require('config');
+import config from 'config';
 
 export default new class {
     async index(req: Request, res: Response) {

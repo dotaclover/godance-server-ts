@@ -5,8 +5,10 @@ export default {
   encode(data: Object) {
     return jwt.sign(data, config.get("jwtPrivateKey"))
   },
-  verify(token: string): Object {
-    const payload = jwt.verify(token, config.get("jwtPrivateKey")) as string;
-    return JSON.parse(payload) || {};
+  verify(token: string, maxAge = 86400): Object {
+    const payload = jwt.verify(token, config.get("jwtPrivateKey"), {
+      maxAge
+    });
+    return payload;
   }
 };

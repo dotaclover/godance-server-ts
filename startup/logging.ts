@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from "winston";
 
 export default function () {
     winston.add(new winston.transports.Console());

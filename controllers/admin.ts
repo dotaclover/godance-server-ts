@@ -8,12 +8,14 @@ const admin = {
     password: '123456'
 }
 export default new class {
-    async login(req: Request, res: Response): Promise<void> {
+    async login(req: Request, res: Response) {
         const { username, password } = req.body;
-        if (username !== admin.username || password !== admin.password)
+        if (username !== admin.username || password !== admin.password) {
             res.status(400).send("Invalid username or password");
+            return;
+        }
 
-        const token = jwt.encode({ id: admin.id, username: admin.username, created: Date.now() });
+        const token = jwt.encode({ id: admin.id, username: admin.username });
         res.send({ token });
     }
 

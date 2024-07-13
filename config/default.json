@@ -1,4 +1,5 @@
 {
     "app_name":"default",
-    "jwtPrivateKey":"jwtPrivateKey"
+    "jwtPrivateKey":"jwtPrivateKey",
+    "jwtMaxAge":86400
 }
