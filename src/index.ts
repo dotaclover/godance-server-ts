@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import logging from './startup/logging';
+import logger from './startup/logger';
 import router from './startup/router';
 import config from './startup/config';
 
@@ -17,8 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //
-logging();
 router(app);
 
 const port = config.get("app_port") || 5273;
-app.listen(port, () => console.log(`Server listen on port:${port}`));
+app.listen(port, () => logger.info(`Server listen on port:${port}`));
