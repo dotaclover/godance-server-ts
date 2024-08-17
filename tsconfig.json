@@ -11,6 +11,6 @@
     "rootDir": "src",       /* 指定 TypeScript 源文件的根目录 */
     "sourceMap": true       /* 生成 source map 文件以便于调试 */
   },
-  "include": ["src/**/*.ts"],  /* 只包含 src/ 下的 TypeScript 文件 */
+  "include": ["src/**/*.ts", "types/*.d.ts"],  /* 只包含 src/ 下的 TypeScript 文件 */
   "exclude": ["node_modules", "dist"]  /* 排除 node_modules 和 dist 目录 */
 }

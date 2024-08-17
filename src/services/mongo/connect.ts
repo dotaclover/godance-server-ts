@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import winston from "winston";
 import config from "config";
 
-export default async (): Promise<void> => {
+const connect = async (): Promise<void> => {
     try {
         await mongoose.connect(config.get<string>("mongodb.url"));
         console.log("MongoDB connection successful");
@@ -12,3 +12,5 @@ export default async (): Promise<void> => {
         process.exit(1);
     }
 }
+
+export default connect;

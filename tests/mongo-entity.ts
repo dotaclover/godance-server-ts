@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
-import EntityDatabase from "../src/services/mongo/entity";
+import EntityDatabase from "../src/services/mongo/EntityDatabase";
 import connect from "../src/services/mongo/connect";
 
 

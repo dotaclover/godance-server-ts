@@ -1,11 +1,7 @@
 import * as express from 'express';
+import { User } from '../src/types';
 
 declare global {
-    interface User {
-        id: number;
-        isAdmin: boolean;
-    }
-
     namespace Express {
         interface Request {
             user: User;

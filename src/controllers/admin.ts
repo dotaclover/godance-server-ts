@@ -8,7 +8,7 @@ const admin = {
     username: 'admin',
     password: '123456'
 }
-export default new class {
+class Admin {
     async login(req: Request, res: Response) {
         const schema = Joi.object({
             username: Joi.string().required().min(3).message("username必须至少3位"),
@@ -30,9 +30,13 @@ export default new class {
     }
 
     async getInfo(req: Request, res: Response) {
-        const { id } = req.user as User;
+        let id: number = 0;
+        if (req.user) id = req?.user?.id || 0;
+
         if (id == admin.id)
             return res.send({ ...admin, password: "" });
         res.send({});
     }
 }
+
+export default new Admin();

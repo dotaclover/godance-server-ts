@@ -1,5 +1,5 @@
 import { Document, Model } from "mongoose";
-import Database from "./database";
+import Database from "./Database";
 
 class EntityDatabase<T extends Document> {
     private model: Model<T>;

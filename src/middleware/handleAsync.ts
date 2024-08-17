@@ -1,6 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import winston from "winston";
-export default function handleAsync(handler: Function) {
+
+const handleAsync = function (handler: Function) {
     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             await handler(req, res);
@@ -17,3 +18,5 @@ export default function handleAsync(handler: Function) {
         }
     };
 }
+
+export default handleAsync;
