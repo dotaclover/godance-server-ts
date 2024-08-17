@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
-import connect from "../services/mongo/connect";
-import Database from "../services/mongo/database";
+import connect from "../src/services/mongo/connect";
+import Database from "../src/services/mongo/database";
 
 interface IUser extends Document {
     name: string;

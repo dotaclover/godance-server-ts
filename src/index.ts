@@ -20,5 +20,5 @@ if (process.env.NODE_ENV === 'production') {
 logging();
 router(app);
 
-const port = config.get("port") || "5273";
+const port = config.get("app_port") || 5273;
 app.listen(port, () => console.log(`Server listen on port:${port}`));
