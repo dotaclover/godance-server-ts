@@ -1,3 +1,11 @@
 {
-    "app_name":""
+    "app_name":"APP_NAME",
+    "app_port":"APP_PORT",
+    "mongodb":{
+        "url":"MONGODB_URL"
+    },
+    "jwt":{
+        "privateKey":"JWT_PRIVATE_KEY",
+        "maxAge":"JWT_MAX_AGE"
+    }
 }

@@ -7,7 +7,5 @@ router.get('/', index.index);
 
 export default function (app: Application) {
     app.use('/', router);
-
     app.use("/admin", admin);
-
 }

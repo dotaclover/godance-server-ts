@@ -1,4 +1,7 @@
 import config from 'config';
-if (!config.get('jwtPrivateKey')) {
-    throw new Error('Fatal Error: jwtPrivateKey is not defined.');
+if (!config.get('jwt.privateKey')) {
+    throw new Error('Fatal Error: jwt.privateKey is not defined.');
 }
+
+
+export default config;
