@@ -1,6 +1,17 @@
 {
   "app_name": "godance@default",
   "app_port": 5273,
+  "cache": {
+    "type": "sqlite",
+    "redis": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "db": 1
+    },
+    "sqlite": {
+      "dbPath": "writable/test.sqlite"
+    }
+  },
   "database": {
     "type": "sqlite",
     "mongodb": {
@@ -16,7 +27,7 @@
     },
     "sqlite": {
       "dialect": "sqlite",
-      "storage": "./test.sqlite"
+      "storage": "writable/test.sqlite"
     },
     "sqlite_memory": {
       "dialect": "sqlite",

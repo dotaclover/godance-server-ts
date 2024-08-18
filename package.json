@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@types/moment": "^2.13.0",
     "axios": "^1.7.4",
     "config": "^3.3.12",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
+    "ioredis": "^5.4.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",

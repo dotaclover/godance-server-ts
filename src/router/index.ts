@@ -5,6 +5,8 @@ import admin from "./admin";
 
 const router = express.Router();
 router.get('/', handleAsync(index.index));
+router.get('/cache', handleAsync(index.cache));
+router.get('/db', handleAsync(index.db));
 
 const routing = function (app: Application) {
     app.use('/', router);

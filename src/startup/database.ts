@@ -1,13 +1,11 @@
+import config from 'config';
 import mongoose from 'mongoose';
 import { Sequelize } from 'sequelize';
-import config from 'config';
-import { initPostModel } from '../models/PostModel';
 
 let sequelize: Sequelize | null = null;
 
 const connectDatabase = async () => {
     const dbType = config.get<string>('database.type');
-
     if (dbType === 'mongodb') {
         const mongoUri = config.get<string>('database.mongodb.uri');
         await mongoose.connect(mongoUri);
@@ -19,7 +17,6 @@ const connectDatabase = async () => {
             port: sequelizeConfig.port,
             dialect: sequelizeConfig.dialect,
         });
-        initPostModel(sequelize);
         await sequelize.sync();
         console.log('Connected to Sequelize (SQL)');
     } else if (["sqlite", "sqlite_memory"].includes(dbType)) {
@@ -28,7 +25,6 @@ const connectDatabase = async () => {
             dialect: "sqlite",
             storage: sequelizeConfig.storage
         });
-        initPostModel(sequelize);
         await sequelize.sync();
         console.log('Connected to Sequelize (SQL)');
     } else {
