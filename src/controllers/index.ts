@@ -30,8 +30,8 @@ class Index {
         });
 
         const result = schema.validate(req.query);
-        // if (result?.error?.details[0]?.message)
-        //     return res.status(400).send(result?.error?.details[0]?.message);
+        if (result?.error?.details[0]?.message)
+            return res.status(400).send(result?.error?.details[0]?.message);
 
         const { id } = req.query;
         const post = await postService.getById(parseInt(id as string));

@@ -14,3 +14,4 @@ const routing = function (app: Application) {
 }
 
 export default routing;
+
