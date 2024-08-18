@@ -22,6 +22,15 @@ const connectDatabase = async () => {
         initPostModel(sequelize);
         await sequelize.sync();
         console.log('Connected to Sequelize (SQL)');
+    } else if (["sqlite", "sqlite_memory"].includes(dbType)) {
+        const sequelizeConfig = config.get<any>(`database.${dbType}`);
+        sequelize = new Sequelize({
+            dialect: "sqlite",
+            storage: sequelizeConfig.storage
+        });
+        initPostModel(sequelize);
+        await sequelize.sync();
+        console.log('Connected to Sequelize (SQL)');
     } else {
         throw new Error(`Unsupported database type: ${dbType}`);
     }
