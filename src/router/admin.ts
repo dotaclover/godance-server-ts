@@ -1,5 +1,5 @@
 import admin from '../controllers/admin';
-import auth from "../middleware/auth";
+import auth from "../middlewares/auth";
 
 //
 import express from "express";

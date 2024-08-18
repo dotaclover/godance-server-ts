@@ -1,6 +1,8 @@
 import { Application } from "express";
 import router from "../router";
 
-export default function (app: Application) {
+function routing(app: Application) {
     router(app);
 }
+
+export default routing;

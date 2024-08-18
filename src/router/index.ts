@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import handleAsync from "../middleware/handleAsync";
+import handleAsync from "../middlewares/handleAsync";
 import index from '../controllers/index';
 import admin from "./admin";
 

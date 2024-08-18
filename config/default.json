@@ -1,11 +1,30 @@
 {
-    "app_name":"godance@default",
-    "app_port":5273,
-    "mongodb":{
-        "url":"mongodb://127.0.0.1:27017/godance"
+  "app_name": "godance@default",
+  "app_port": 5273,
+  "database": {
+    "type": "mysql",
+    "mongodb": {
+      "uri": "mongodb://127.0.0.1:27017/test"
     },
-    "jwt":{
-        "privateKey":"jwtPrivateKey",
-        "maxAge":86400
+    "mysql": {
+      "dialect": "mysql",
+      "host": "127.0.0.1",
+      "port": 3308,
+      "username": "root",
+      "password": "root",
+      "database": "test"
+    },
+    "sqlite": {
+      "dialect": "sqlite",
+      "storage": "./test.sqlite"
+    },
+    "sqlite_memory": {
+      "dialect": "sqlite",
+      "storage": ":memory:"
     }
+  },
+  "jwt": {
+    "privateKey": "jwtPrivateKey",
+    "maxAge": 86400
+  }
 }
