@@ -2,28 +2,27 @@
   "app_name": "godance@default",
   "app_port": 5273,
   "cache": {
-    "type": "sqlite",
     "redis": {
+      "db": 2,
       "host": "127.0.0.1",
-      "port": 6379,
-      "db": 1
+      "port": 6379
     },
     "sqlite": {
       "dbPath": "writable/test.sqlite"
-    }
+    },
+    "type": "sqlite"
   },
   "database": {
-    "type": "sqlite",
     "mongodb": {
       "uri": "mongodb://127.0.0.1:27017/test"
     },
     "mysql": {
+      "database": "test",
       "dialect": "mysql",
       "host": "127.0.0.1",
-      "port": 3308,
-      "username": "root",
       "password": "root",
-      "database": "test"
+      "port": 3308,
+      "username": "root"
     },
     "sqlite": {
       "dialect": "sqlite",
@@ -32,10 +31,27 @@
     "sqlite_memory": {
       "dialect": "sqlite",
       "storage": ":memory:"
-    }
+    },
+    "type": "sqlite"
   },
   "jwt": {
-    "privateKey": "jwtPrivateKey",
-    "maxAge": 86400
+    "maxAge": 86400,
+    "privateKey": "jwtPrivateKey"
+  },
+  "queue": {
+    "rabbitmq": {
+      "url": "amqp://guest:guest@localhost:5672/"
+    },
+    "redis": {
+      "db": 1,
+      "host": "127.0.0.1",
+      "port": 6379
+    },
+    "type": "redis"
+  },
+  "redis": {
+    "db": 0,
+    "host": "127.0.0.1",
+    "port": 6379
   }
 }
