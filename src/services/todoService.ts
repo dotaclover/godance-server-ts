@@ -4,7 +4,6 @@ import MongoCrud from './CrudService/MongoCrud';
 import SequelizeCrud from './CrudService/SequelizeCrud';
 import { TodoModel } from '../models/TodoModel';
 import { TodoMongo, ITodo } from '../mongo/TodoMongo';
-import { getSequelizeInstance } from '../startup/database';
 
 const createTodoService = (): IDataCrud<TodoModel | ITodo> => {
     const dbType = config.get<string>('database.type');
@@ -12,7 +11,6 @@ const createTodoService = (): IDataCrud<TodoModel | ITodo> => {
     if (dbType === 'mongodb')
         return new MongoCrud(TodoMongo);
 
-    const sequelize = getSequelizeInstance();
     return new SequelizeCrud(TodoModel);
 }
 

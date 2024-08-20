@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { geDBInstance } from '../services/database';
 
 class PostModel extends Model {
     public id!: number;
@@ -7,7 +8,7 @@ class PostModel extends Model {
     public body!: string;
 }
 
-function initPostModel(sequelize: Sequelize) {
+geDBInstance().then((sequelize: Sequelize) => {
     PostModel.init(
         {
             id: {
@@ -33,6 +34,8 @@ function initPostModel(sequelize: Sequelize) {
             sequelize,
         }
     );
-}
+})
 
-export { PostModel, initPostModel }
+
+
+export { PostModel }

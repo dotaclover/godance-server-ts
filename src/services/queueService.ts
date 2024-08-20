@@ -1,5 +1,5 @@
+import config from 'config';
 import { Redis, RedisOptions } from 'ioredis';
-import config from '../startup/config';
 
 class SimpleQueue {
     private client: Redis;

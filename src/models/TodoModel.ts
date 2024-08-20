@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { geDBInstance } from '../services/database';
 
 class TodoModel extends Model {
     public id!: number;
@@ -7,7 +8,7 @@ class TodoModel extends Model {
     public completed!: boolean;
 }
 
-function initTodoModel(sequelize: Sequelize) {
+geDBInstance().then((sequelize: Sequelize) => {
     TodoModel.init(
         {
             id: {
@@ -32,7 +33,7 @@ function initTodoModel(sequelize: Sequelize) {
             tableName: 'todos',
             sequelize,
         }
-    );
-}
+    )
+})
 
-export { TodoModel, initTodoModel }
+export { TodoModel }

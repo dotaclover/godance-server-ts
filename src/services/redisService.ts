@@ -1,5 +1,5 @@
+import config from 'config';
 import { Redis, RedisOptions } from 'ioredis';
-import config from '../startup/config';
 
 interface RedisServiceOptions {
     host?: string;
@@ -94,3 +94,4 @@ export class RedisService {
 
 const options = config.get("reids") as RedisOptions;
 const redisService = new RedisService(options);
+export default redisService;

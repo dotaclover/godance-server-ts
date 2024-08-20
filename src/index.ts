@@ -4,8 +4,7 @@ import morgan from 'morgan';
 import logger from './startup/logger';
 import routing from './startup/router';
 import config from './startup/config';
-import { connectDatabase } from './startup/database';
-import initialServices from './services/initialServices';
+import { connectDatabase } from './services/database';
 
 const app = express();
 routing(app);
@@ -16,9 +15,6 @@ app.use(express.json());
 app.use(helmet());
 
 connectDatabase().then(async () => {
-
-    await initialServices();
-
     const port = config.get("app_port") || 5273;
     app.listen(port, () => logger.info(`Server listen on port:${port}`));
 }).catch(error => {
