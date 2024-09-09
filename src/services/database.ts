@@ -1,5 +1,4 @@
 import config from 'config';
-import mongoose from 'mongoose';
 import { Sequelize } from 'sequelize';
 
 let connected = false;
@@ -10,13 +9,7 @@ const connectDatabase = async () => {
     if (connected) return sequelize;
 
     const dbType = config.get<string>('database.type');
-    if (dbType === 'mongodb') {
-        const mongoUri = config.get<string>('database.mongodb.uri');
-        await mongoose.connect(mongoUri);
-
-        connected = true;
-        console.log('Connected to MongoDB');
-    } else if (dbType === 'mysql') {
+    if (dbType === 'mysql') {
         const sequelizeConfig = config.get<any>('database.mysql');
         sequelize = new Sequelize(sequelizeConfig.database, sequelizeConfig.username, sequelizeConfig.password, {
             host: sequelizeConfig.host,

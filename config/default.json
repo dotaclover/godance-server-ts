@@ -3,30 +3,30 @@
   "app_port": 5273,
   "cache": {
     "redis": {
-      "db": 2,
       "host": "127.0.0.1",
-      "port": 6379
+      "port": 6379,
+      "db": 0
     },
     "sqlite": {
-      "dbPath": "writable/test.sqlite"
+      "dbPath": "writable/db.sqlite"
     },
-    "type": "sqlite"
+    "type": "redis"
   },
   "database": {
     "mongodb": {
-      "uri": "mongodb://127.0.0.1:27017/test"
+      "uri": "mongodb://127.0.0.1:27017/express"
     },
     "mysql": {
-      "database": "test",
+      "database": "express",
       "dialect": "mysql",
       "host": "127.0.0.1",
+      "username": "root",
       "password": "root",
-      "port": 3308,
-      "username": "root"
+      "port": 3308
     },
     "sqlite": {
       "dialect": "sqlite",
-      "storage": "writable/test.sqlite"
+      "storage": "writable/db.sqlite"
     },
     "sqlite_memory": {
       "dialect": "sqlite",
@@ -43,15 +43,15 @@
       "url": "amqp://guest:guest@localhost:5672/"
     },
     "redis": {
-      "db": 1,
       "host": "127.0.0.1",
-      "port": 6379
+      "port": 6379,
+      "db": 0
     },
     "type": "redis"
   },
   "redis": {
-    "db": 0,
     "host": "127.0.0.1",
-    "port": 6379
+    "port": 6379,
+    "db": 0
   }
 }

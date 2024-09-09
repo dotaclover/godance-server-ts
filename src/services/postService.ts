@@ -1,16 +1,9 @@
-import config from 'config';
-import IDataCrud from './CrudService/IDataCrud';
-import MongoCrud from './CrudService/MongoCrud';
-import SequelizeCrud from './CrudService/SequelizeCrud';
-import { PostModel } from '../models/PostModel';
-import { PostMongo, IPost } from '../mongo/PostMongo';
+import IDataCrud from '../library/IDataCrud';
+import MongoCrud from '../library/MongoCrud';
+import { IPost, PostMongo } from '../mongo/PostMongo';
 
-const createPostService = (): IDataCrud<PostModel | IPost> => {
-    const dbType = config.get<string>('database.type');
-
-    if (dbType === 'mongodb')
-        return new MongoCrud(PostMongo);
-    return new SequelizeCrud(PostModel);
+const createPostService = (): IDataCrud<IPost> => {
+    return new MongoCrud(PostMongo);
 }
 
 export default createPostService();

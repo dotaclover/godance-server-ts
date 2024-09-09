@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Joi, { valid } from "joi";
+import Joi from "joi";
 import jwt from "../utils/jwt";
 
 const admin = {
