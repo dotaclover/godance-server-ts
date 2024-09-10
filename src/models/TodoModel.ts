@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { geDBInstance } from '../services/database';
+import config from 'config';
 
 class TodoModel extends Model {
     public id!: number;
@@ -18,6 +19,7 @@ geDBInstance().then((sequelize: Sequelize) => {
             },
             userId: {
                 type: DataTypes.INTEGER.UNSIGNED,
+                field: "user_id",
                 allowNull: false,
             },
             title: {
@@ -33,7 +35,10 @@ geDBInstance().then((sequelize: Sequelize) => {
             tableName: 'todos',
             sequelize,
         }
-    )
+    );
+
+    if (config.util.getEnv("NODE_ENV") === "development")
+        sequelize.sync();
 })
 
 export { TodoModel }

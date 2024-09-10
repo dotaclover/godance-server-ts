@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/', handleAsync(index.index));
 router.get('/cache', handleAsync(index.cache));
 router.get('/db', handleAsync(index.db));
+router.get('/mongo', handleAsync(index.mongo));
 
 const routing = function (app: Application) {
     app.use('/', router);

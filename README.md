@@ -1,4 +1,4 @@
-# 一个`Express`服务器模板
+# `Express` +`TypeScript` Web Server
 
 ## 快速开始
 
@@ -14,26 +14,16 @@
 my-express-server/
 ├── src/
 │ ├── index.ts      #程序入口
-│ ├── types.ts
+│ ├── types.ts      #类型定义
 │ ├── controllers/  #控制器
-│ │ ├── index.ts
-│ │ ├── ...
-│ ├── middlewares/
-│ │ ├── auth.ts
-│ │ └── ...
-│ ├── router/       #路由设置
-│ │ ├── index.ts
-│ │ └── ...
+│ ├── library/      #类库
+│ ├── middlewares/  #中间件
+│ ├── models/       #模型
+│ ├── router/       #路由
 │ ├── services/     #服务组件
-│ │ └── mongo/
-│ │ └── ...
-│ ├── startup/
-│ │ ├── config.ts
-│ │ ├── ...
-│ ├── utils/
-│ │ ├── jwt.ts
-│ │ ├── ...
-├── writable/       #日志文件
+│ ├── startup/      #启动相关
+│ ├── utils/        #工具类库
+├── writable/
 └── package.json
 └── ...
 
