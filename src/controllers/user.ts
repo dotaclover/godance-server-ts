@@ -43,6 +43,23 @@ class User {
         }
         res.send({});
     }
+
+    async suspend(req: Request, res: Response) {
+        const schema = Joi.object({
+            id: Joi.number().required().min(1).message("username必须至少3位"),
+        });
+
+        const isValid = schema.validate(req.query);
+        if (isValid.error)
+            return res.status(400).send(isValid.error.details[0].message);
+
+        const { id } = req.query;
+        await userService.suspend(parseInt(id as string));
+
+        res.send({ status: "ok" });
+
+
+    }
 }
 
 export default new User();
