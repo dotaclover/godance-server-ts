@@ -1,9 +1,5 @@
-import IDataCrud from '../library/IDataCrud';
 import MongoCrud from '../library/MongoCrud';
-import { IPost, PostMongo } from '../models/PostMongo';
+import { PostMongo } from '../models/PostMongo';
 
-const createPostService = (): IDataCrud<IPost> => {
-    return new MongoCrud(PostMongo);
-}
-
-export default createPostService();
+const postService = new MongoCrud(PostMongo);
+export default postService;

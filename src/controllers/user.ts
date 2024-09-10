@@ -1,14 +1,9 @@
 import { Request, Response } from "express";
+import userService from "../services/userService";
 import Joi from "joi";
 import jwt from "../utils/jwt";
 
-const admin = {
-    id: 1,
-    isAdmin: true,
-    username: 'admin',
-    password: '123456'
-}
-class Admin {
+class User {
     async login(req: Request, res: Response) {
         const schema = Joi.object({
             username: Joi.string().required().min(3).message("username必须至少3位"),
@@ -20,23 +15,34 @@ class Admin {
             return res.status(400).send(isValid.error.details[0].message);
 
         const { username, password } = req.body;
-        if (username !== admin.username || password !== admin.password) {
+        const user = await userService.find({
+            where: { username, status: 1 }
+        });
+
+        if (!user || user.password !== password) {
             res.status(400).send("Invalid username or password");
             return;
         }
 
-        const token = jwt.encode({ id: admin.id, username: admin.username });
+        const token = jwt.encode({ id: user.id, username: user.username });
         res.send({ token });
     }
 
     async getInfo(req: Request, res: Response) {
         let id: number = 0;
         if (req.user) id = req?.user?.id || 0;
+        if (!id) {
+            res.send({});
+            return;
+        }
 
-        if (id == admin.id)
-            return res.send({ ...admin, password: "" });
+        const user = await userService.getById(id);
+        if (user) {
+            res.send({ ...user.dataValues, password: "" });
+            return;
+        }
         res.send({});
     }
 }
 
-export default new Admin();
+export default new User();

@@ -1,4 +1,4 @@
-import admin from '../controllers/admin';
+import user from '../controllers/user';
 import auth from "../middlewares/auth";
 
 //
@@ -6,8 +6,8 @@ import express from "express";
 const router = express.Router();
 
 //
-router.post("/login", admin.login);
-router.get("/me", auth, admin.getInfo);
+router.post("/login", user.login);
+router.get("/me", auth, user.getInfo);
 
 //
 export default router;

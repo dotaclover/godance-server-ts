@@ -32,7 +32,7 @@
       "dialect": "sqlite",
       "storage": ":memory:"
     },
-    "type": "mysql"
+    "type": "sqlite"
   },
   "jwt": {
     "maxAge": 86400,

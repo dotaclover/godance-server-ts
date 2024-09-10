@@ -1,16 +1,21 @@
-import { Model, ModelStatic } from 'sequelize';
+import { FindOptions, Model, ModelStatic } from 'sequelize';
 import IDataCrud from './IDataCrud';
 
 class SequelizeCrud<T extends Model> implements IDataCrud<T> {
     constructor(private model: ModelStatic<T>) { }
 
-    async getAll(): Promise<T[]> {
-        const instances = await this.model.findAll();
+    async getAll(options: FindOptions = {}): Promise<T[]> {
+        const instances = await this.model.findAll(options);
         return instances as T[];
     }
 
     async getById(id: number): Promise<T | null> {
         const instance = await this.model.findByPk(id);
+        return instance as T | null;
+    }
+
+    async find(options: FindOptions = {}): Promise<T | null> {
+        const instance = await this.model.findOne(options);
         return instance as T | null;
     }
 

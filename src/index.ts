@@ -7,11 +7,11 @@ import config from './startup/config';
 import { connectDatabase } from './services/database';
 
 const app = express();
+app.use(express.json());
 routing(app);
 
 //middlewares
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
-app.use(express.json());
 app.use(helmet());
 
 connectDatabase().then(async () => {
