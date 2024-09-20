@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import userService from "../services/userService";
 import authentication from "./authentication";
+import userService from "../services/Logic/userService";
 const authorization = async function (req: Request, res: Response, next: NextFunction) {
   authentication(req, res, async () => {
     if (!req.user)

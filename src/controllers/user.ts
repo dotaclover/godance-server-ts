@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import userService from "../services/userService";
 import Joi from "joi";
 import jwt from "../utils/jwt";
+import userService from "../services/Logic/userService";
 
 class User {
     async login(req: Request, res: Response) {
