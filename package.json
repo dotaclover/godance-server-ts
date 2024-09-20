@@ -2,7 +2,7 @@
   "name": "godance-server-ts",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "bootstrap/index.js",
   "dependencies": {
     "amqplib": "^0.10.4",
     "axios": "^1.7.4",
@@ -27,7 +27,6 @@
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/moment": "^2.13.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.5.5",
     "jest": "^29.7.0",
@@ -36,9 +35,9 @@
     "ts-node-dev": "^2.0.0"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/bootstrap/index.ts",
     "build": "tsc --build --clean && tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/bootstrap/index.js",
     "test": "jest"
   },
   "keywords": [],

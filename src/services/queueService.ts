@@ -1,6 +1,6 @@
 import redisService from './redisService';
 
-class SimpleQueue {
+export class QueueService {
 
     async push(queueName: string, value: string): Promise<void> {
         await redisService.enqueue(queueName, value);
@@ -24,5 +24,5 @@ class SimpleQueue {
     }
 }
 
-const queueService = new SimpleQueue();
+const queueService = new QueueService();
 export default queueService;

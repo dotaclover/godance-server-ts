@@ -1,5 +1,5 @@
-import SequelizeCrud from '../library/SequelizeCrud';
-import { TodoModel } from '../models/TodoModel';
+import SequelizeCrud from '../../models/BaseSequelize';
+import { TodoModel } from '../../models/TodoModel';
 
 const todoService = new SequelizeCrud(TodoModel);
 export default todoService;

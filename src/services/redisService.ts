@@ -1,4 +1,4 @@
-import config from '../startup/config';
+import config from '../bootstrap/config';
 import { Redis, RedisOptions } from 'ioredis';
 
 interface RedisServiceOptions {

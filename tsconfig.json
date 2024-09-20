@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2016",
-    "typeRoots": ["types", "node_modules/@types"],  // 加入 node_modules/@types
+    "typeRoots": ["types", "node_modules/@types"],
     "outDir": "dist",
     "rootDir": ".",
     "sourceMap": true
