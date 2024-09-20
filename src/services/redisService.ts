@@ -106,6 +106,17 @@ export class RedisService {
     async disconnect(): Promise<void> {
         await this.client.quit();
     }
+
+    async connect(): Promise<void> {
+        if (['ready', 'connecting'].includes(this.client.status))
+            return;
+        await this.client.connect();
+    }
+
+
+    async flushDB(): Promise<void> {
+        await this.client.flushdb();
+    }
 }
 
 const options = config.get("redis") as RedisOptions;

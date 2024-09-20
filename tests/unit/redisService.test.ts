@@ -1,6 +1,17 @@
 import redisService from '../../src/services/redisService';
 
 describe('RedisService', () => {
+    beforeEach(async () => {
+        await redisService.connect();
+    });
+
+    afterEach(async () => {
+        await redisService.flushDB();
+    });
+
+    afterAll(async () => {
+        await redisService.disconnect();
+    });
 
     it('should set and get a value', async () => {
         const key = 'test-key';
