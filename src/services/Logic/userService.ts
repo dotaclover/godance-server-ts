@@ -1,5 +1,5 @@
 import { ModelStatic } from 'sequelize';
-import SequelizeCrud from '../../library/SequelizeCrud';
+import SequelizeCrud from '../../models/BaseSequelize';
 import { UserModel } from '../../models/UserModel';
 
 class UserService extends SequelizeCrud<UserModel> {

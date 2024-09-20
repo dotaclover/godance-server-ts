@@ -1,7 +1,6 @@
 import { Model, Document } from 'mongoose';
-import IDataCrud from './IDataCrud';
 
-class MongoCrud<T extends Document> implements IDataCrud<T> {
+class BaseMongo<T extends Document> {
     constructor(private model: Model<T>) { }
 
     async getAll() {
@@ -25,4 +24,4 @@ class MongoCrud<T extends Document> implements IDataCrud<T> {
     }
 }
 
-export default MongoCrud;
+export default BaseMongo;

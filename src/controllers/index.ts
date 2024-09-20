@@ -2,9 +2,9 @@ import Joi from "joi";
 import config from 'config';
 import mongoose from 'mongoose';
 import { Request, Response } from "express";
-import postService from "../services/Logic/postService";
+import postService from "../services/logService";
 import cacheService from "../services/cacheService";
-import todoService from "../services/todoService";
+import todoService from "../services/Logic/todoService";
 class Index {
     async index(req: Request, res: Response) {
         res.send(`app_name=${config.get('app_name',)}`);

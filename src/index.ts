@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import logger from './startup/logger';
 import routing from './startup/router';
 import config from './startup/config';
-import { connectDatabase } from './services/database';
+import { connectDatabase } from './startup/database';
 
 const app = express();
 app.use(express.json());

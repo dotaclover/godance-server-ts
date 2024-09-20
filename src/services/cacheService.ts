@@ -1,7 +1,7 @@
 import config from 'config';
 import redisService from './redisService';
-import MemoryCacheService from './CacheService/MemoryCacheService';
-import SQLiteCacheService from './CacheService/SQLiteCacheService';
+import MemoryCacheService from './Cache/MemoryCacheService';
+import SQLiteCacheService from './Cache/SQLiteCacheService';
 
 const createCacheService = (): ICacheService => {
     const cacheType = process.env.CACHE_TYPE ?? config.get<string>('cache.type');

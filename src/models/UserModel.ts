@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { geDBInstance } from '../services/database';
+import { geDBInstance } from '../startup/database';
 import config from 'config';
 
 class UserModel extends Model {

@@ -1,7 +1,6 @@
 import { FindOptions, Model, ModelStatic } from 'sequelize';
-import IDataCrud from './IDataCrud';
 
-class SequelizeCrud<T extends Model> implements IDataCrud<T> {
+class BaseSequelize<T extends Model> {
     constructor(private model: ModelStatic<T>) { }
 
     async getAll(options: FindOptions = {}): Promise<T[]> {
@@ -43,4 +42,4 @@ class SequelizeCrud<T extends Model> implements IDataCrud<T> {
     }
 }
 
-export default SequelizeCrud;
+export default BaseSequelize;
