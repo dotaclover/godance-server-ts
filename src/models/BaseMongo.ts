@@ -1,4 +1,11 @@
-import { Model, Document } from 'mongoose';
+import { Model, Document, FilterQuery } from 'mongoose';
+
+interface FindOptions<T extends Document> {
+    filter?: FilterQuery<T>; // 使用 FilterQuery<T> 更明确类型
+    sort?: string | { [key: string]: 1 | -1 }; // 简化 sort 类型
+    page?: number;
+    pageSize?: number;
+}
 
 class BaseMongo<T extends Document> {
     constructor(private model: Model<T>) { }
@@ -22,6 +29,21 @@ class BaseMongo<T extends Document> {
 
     async delete(id: string): Promise<T | null> {
         return await this.model.findByIdAndDelete(id).exec();
+    }
+
+    async find(options: FindOptions<T>): Promise<{ items: T[]; total: number }> {
+        const query = this.model.find(options.filter ?? {});
+        if (options.sort)
+            query.sort(options.sort);
+
+        if (options.page && options.pageSize) {
+            const skip = (options.page - 1) * options.pageSize;
+            query.skip(skip).limit(options.pageSize);
+        }
+
+        const [items, total] = await Promise.all([query.exec(), query.countDocuments()]);
+
+        return { items, total };
     }
 }
 
