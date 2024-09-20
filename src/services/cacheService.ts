@@ -4,21 +4,21 @@ import MemoryCacheService from './CacheService/MemoryCacheService';
 import SQLiteCacheService from './CacheService/SQLiteCacheService';
 
 const createCacheService = (): ICacheService => {
-    const cacheType = config.get<string>('cache.type');
+    const cacheType = process.env.CACHE_TYPE ?? config.get<string>('cache.type');
 
-    if (cacheType === 'redis') {
+    if (cacheType === 'redis')
         return redisService;
-    }
+
+    if (cacheType === 'memory')
+        return new MemoryCacheService();
 
     if (cacheType === 'sqlite') {
         const dbPath = config.get<string>('cache.sqlite.dbPath');
         return new SQLiteCacheService(dbPath);
     }
-
-    if (cacheType === 'memory')
-        return new MemoryCacheService();
-
     throw new Error(`Unsupported cache type: ${cacheType}`);
 }
 
-export default createCacheService();
+const cacheService = createCacheService();
+export { createCacheService };
+export default cacheService;
