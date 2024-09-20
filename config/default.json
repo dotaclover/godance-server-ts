@@ -1,6 +1,6 @@
 {
   "app_name": "godance@default",
-  "app_port": 5273,
+  "app_port": 8787,
   "cache": {
     "redis": {
       "host": "127.0.0.1",
