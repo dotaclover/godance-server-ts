@@ -2,7 +2,7 @@ import Joi from "joi";
 import config from 'config';
 import mongoose from 'mongoose';
 import { Request, Response } from "express";
-import postService from "../services/postService";
+import postService from "../services/Logic/postService";
 import cacheService from "../services/cacheService";
 import todoService from "../services/todoService";
 class Index {

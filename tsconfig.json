@@ -6,11 +6,11 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2016",
-    "typeRoots": ["types"],
-    "outDir": "dist",  /* 指定编译输出的目录 */
-    "rootDir": "src",       /* 指定 TypeScript 源文件的根目录 */
-    "sourceMap": true       /* 生成 source map 文件以便于调试 */
+    "typeRoots": ["types", "node_modules/@types"],  // 加入 node_modules/@types
+    "outDir": "dist",
+    "rootDir": ".",
+    "sourceMap": true
   },
-  "include": ["src/**/*.ts", "types/*.d.ts"],  /* 只包含 src/ 下的 TypeScript 文件 */
-  "exclude": ["node_modules", "dist"]  /* 排除 node_modules 和 dist 目录 */
+  "include": ["src/**/*.ts", "tests/**/*.ts", "types/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

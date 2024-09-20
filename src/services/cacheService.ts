@@ -1,15 +1,13 @@
 import config from 'config';
-import { RedisOptions } from 'ioredis';
+import redisService from './redisService';
 import MemoryCacheService from './CacheService/MemoryCacheService';
-import RedisCacheService from './CacheService/RedisCacheService';
 import SQLiteCacheService from './CacheService/SQLiteCacheService';
 
 const createCacheService = (): ICacheService => {
     const cacheType = config.get<string>('cache.type');
 
     if (cacheType === 'redis') {
-        const redisOptions = config.get<RedisOptions>('cache.redis');
-        return new RedisCacheService(redisOptions);
+        return redisService;
     }
 
     if (cacheType === 'sqlite') {

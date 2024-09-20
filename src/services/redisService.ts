@@ -1,4 +1,4 @@
-import config from 'config';
+import config from '../startup/config';
 import { Redis, RedisOptions } from 'ioredis';
 
 interface RedisServiceOptions {
@@ -20,9 +20,22 @@ export class RedisService {
         });
     }
 
-    // Set key-value pair
-    async set(key: string, value: string): Promise<void> {
-        await this.client.set(key, value);
+    // Implementing ICacheService methods
+    async get<T>(key: string): Promise<T | null> {
+        const value = await this.client.get(key);
+        if (value) {
+            return JSON.parse(value) as T;
+        }
+        return null;
+    }
+
+    async set<T>(key: string, value: T, ttl?: number): Promise<void> {
+        const serializedValue = JSON.stringify(value);
+        if (ttl) {
+            await this.client.setex(key, ttl, serializedValue);
+        } else {
+            await this.client.set(key, serializedValue);
+        }
     }
 
     // Set key-value pair with expiration time (seconds)
@@ -39,11 +52,6 @@ export class RedisService {
     // Set key-value pair and return the old value
     async getset(key: string, value: string): Promise<string | null> {
         return await this.client.getset(key, value);
-    }
-
-    // Get value by key
-    async get(key: string): Promise<string | null> {
-        return await this.client.get(key);
     }
 
     // Queue operations: LPUSH (enqueue), RPOP (dequeue)
@@ -86,12 +94,20 @@ export class RedisService {
         return await this.client.smembers(setName);
     }
 
+    async peek(queueName: string): Promise<string[]> {
+        return await this.client.lrange(queueName, -1, -1);
+    }
+
+    async delete(key: string): Promise<number> {
+        return await this.client.del(key);
+    }
+
     // Close the Redis connection
     async disconnect(): Promise<void> {
         await this.client.quit();
     }
 }
 
-const options = config.get("reids") as RedisOptions;
+const options = config.get("redis") as RedisOptions;
 const redisService = new RedisService(options);
 export default redisService;

@@ -1,35 +1,28 @@
-import config from 'config';
-import { Redis, RedisOptions } from 'ioredis';
+import redisService from './redisService';
 
 class SimpleQueue {
-    private client: Redis;
-
-    constructor(redisOptions: RedisOptions) {
-        this.client = new Redis(redisOptions);
-    }
 
     async push(queueName: string, value: string): Promise<void> {
-        await this.client.lpush(queueName, value);
+        await redisService.enqueue(queueName, value);
     }
 
     async pop(queueName: string): Promise<string | null> {
-        return this.client.rpop(queueName);
+        return redisService.dequeue(queueName);
     }
 
     async length(queueName: string): Promise<number> {
-        return this.client.llen(queueName);
+        return redisService.queueLength(queueName);
     }
 
     async peek(queueName: string): Promise<string | null> {
-        const items = await this.client.lrange(queueName, -1, -1);
+        const items = await redisService.peek(queueName);
         return items.length > 0 ? items[0] : null;
     }
 
-    async clear(queueName: string): Promise<void> {
-        await this.client.del(queueName);
+    async clear(key: string): Promise<void> {
+        await redisService.delete(key);
     }
 }
 
-const redisOptions = config.get("redis") as RedisOptions;
-const queueService = new SimpleQueue(redisOptions);
+const queueService = new SimpleQueue();
 export default queueService;
