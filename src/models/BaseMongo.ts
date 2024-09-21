@@ -31,20 +31,27 @@ class BaseMongo<T extends Document> {
         return await this.model.findByIdAndDelete(id).exec();
     }
 
-    async find(options: FindOptions<T>): Promise<{ items: T[]; total: number }> {
-        const query = this.model.find(options.filter ?? {});
-        if (options.sort)
-            query.sort(options.sort);
+    async deleteMany(filter: FilterQuery<T>){
+        return await this.model.deleteMany(filter);
+    }
 
+    async find(options: FindOptions<T>): Promise<{ items: T[]; total: number }> {
+        const filter = options.filter ?? {};
+        const query = this.model.find(filter); // 用于获取结果的查询
+        const countQuery = this.model.countDocuments(filter); // 用于获取总数的查询
+    
+        if (options.sort) query.sort(options.sort);
+    
         if (options.page && options.pageSize) {
             const skip = (options.page - 1) * options.pageSize;
             query.skip(skip).limit(options.pageSize);
         }
-
-        const [items, total] = await Promise.all([query.exec(), query.countDocuments()]);
-
+    
+        const [items, total] = await Promise.all([query.exec(), countQuery.exec()]); // 独立执行
+    
         return { items, total };
     }
+    
 }
 
 export default BaseMongo;
