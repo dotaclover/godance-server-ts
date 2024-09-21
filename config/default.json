@@ -16,13 +16,44 @@
     "uri": "mongodb://127.0.0.1:27017/test"
   },
   "database": {
+    "type": "mysql",
     "mysql": {
       "database": "test",
-      "dialect": "mysql",
-      "host": "127.0.0.1",
       "username": "root",
       "password": "root",
-      "port": 3308
+      "host": "localhost",
+      "port": 3308,
+      "dialect": "mysql",
+      "poolMax": 10,
+      "poolMin": 0,
+      "acquire": 30000,
+      "idle": 10000
+    },
+    "pgsql": {
+      "database": "your_pgsql_db",
+      "username": "your_pgsql_user",
+      "password": "your_pgsql_password",
+      "host": "localhost",
+      "port": 5432,
+      "poolMax": 10,
+      "poolMin": 0,
+      "acquire": 30000,
+      "idle": 10000
+    },
+    "mssql": {
+      "database": "your_mssql_db",
+      "username": "your_mssql_user",
+      "password": "your_mssql_password",
+      "host": "localhost",
+      "port": 1433,
+      "dialectOptions": {
+        "encrypt": true,
+        "requestTimeout": 30000
+      },
+      "poolMax": 10,
+      "poolMin": 0,
+      "acquire": 30000,
+      "idle": 10000
     },
     "sqlite": {
       "dialect": "sqlite",
@@ -31,8 +62,7 @@
     "sqlite_memory": {
       "dialect": "sqlite",
       "storage": ":memory:"
-    },
-    "type": "sqlite"
+    }
   },
   "jwt": {
     "maxAge": 86400,

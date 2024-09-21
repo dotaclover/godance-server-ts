@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { geDBInstance } from '../bootstrap/database';
+import { getDBInstance } from '../bootstrap/database';
 import config from 'config';
 
 class UserModel extends Model {
@@ -10,7 +10,7 @@ class UserModel extends Model {
     public password!: string;
 }
 
-geDBInstance().then((sequelize: Sequelize) => {
+getDBInstance().then((sequelize: Sequelize) => {
     UserModel.init(
         {
             id: {

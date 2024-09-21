@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { geDBInstance } from '../bootstrap/database';
+import { getDBInstance } from '../bootstrap/database';
 import config from 'config';
 
 class TodoModel extends Model {
@@ -9,7 +9,7 @@ class TodoModel extends Model {
     public completed!: boolean;
 }
 
-geDBInstance().then((sequelize: Sequelize) => {
+getDBInstance().then((sequelize: Sequelize) => {
     TodoModel.init(
         {
             id: {

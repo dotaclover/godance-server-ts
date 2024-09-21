@@ -1,4 +1,4 @@
-import { FindOptions, Model, ModelStatic } from 'sequelize';
+import { FindOptions, Model, ModelStatic, Order, WhereOptions } from 'sequelize';
 
 class BaseSequelize<T extends Model> {
     constructor(private model: ModelStatic<T>) { }
@@ -39,6 +39,27 @@ class BaseSequelize<T extends Model> {
             return instance as T;
         }
         return null;
+    }
+
+    async queryWithFilters(
+        where: WhereOptions<T> = {},
+        group?: string | string[], // Modified the type here
+        order: Order = [['id', 'ASC']],
+        limit: number = 10,
+        offset: number = 0
+    ): Promise<{ rows: T[], count: number }> {
+        const options: FindOptions = {
+            where,
+            order,
+            limit,
+            offset
+        };
+
+        if (group) // Ensure the group is set only if it's provided
+            options.group = group;
+
+        const { rows, count } = await this.model.findAndCountAll(options);
+        return { rows, count };
     }
 }
 
