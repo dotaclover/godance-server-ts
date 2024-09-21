@@ -20,13 +20,23 @@ export class RedisService {
         });
     }
 
-    // Implementing ICacheService methods
-    async get<T>(key: string): Promise<T | null> {
+    // Updated get method in RedisService class
+    async get<T>(key: string, raw = false): Promise<T | null> {
         const value = await this.client.get(key);
-        if (value) {
-            return JSON.parse(value) as T;
+
+        if (!value) return null;
+
+        if (raw) return (value as unknown as T);
+
+        try {
+            const parsedValue = JSON.parse(value);
+
+            // Return parsed value for objects
+            return typeof parsedValue === 'object' ? parsedValue as T : (value as unknown as T);
+        } catch (error) {
+            // If JSON.parse fails, it's a primitive type (string, number, boolean)
+            return value as unknown as T;
         }
-        return null;
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
