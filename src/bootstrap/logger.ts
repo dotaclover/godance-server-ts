@@ -4,7 +4,6 @@ import config from "./config";
 winston.exceptions.handle(new winston.transports.File({ filename: 'writable/unhandledException.log' }));
 winston.rejections.handle(new winston.transports.File({ filename: 'writable/unhandledRejection.log' }));
 
-
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),

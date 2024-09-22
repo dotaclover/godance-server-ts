@@ -42,3 +42,6 @@ export async function initTodoModel() {
     if (config.util.getEnv("NODE_ENV") === "development")
         sequelize.sync();
 }
+
+//
+initTodoModel();

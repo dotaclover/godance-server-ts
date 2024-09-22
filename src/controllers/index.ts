@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import mongoLog from "../services/mongoLog";
 import cacheService from "../services/cacheService";
 import todoService from "../services/Logic/todoService";
+
 class Index {
     async index(req: Request, res: Response) {
         res.send(`app_name=${config.get('app_name',)}`);
@@ -25,7 +26,6 @@ class Index {
     }
 
     async db(req: Request, res: Response) {
-
         const schema = Joi.object({
             id: Joi.number().required().min(1)
         });
