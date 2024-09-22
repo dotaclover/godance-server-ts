@@ -20,6 +20,12 @@ export class RedisService {
             connectTimeout: 10000,
             keepAlive: 30000
         });
+
+        setInterval(() => {
+            this.client.ping().catch(err => {
+                console.error('Ping failed:', err);
+            });
+        }, 30000);
     }
 
     // Updated get method in RedisService class

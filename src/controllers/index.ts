@@ -12,13 +12,13 @@ class Index {
     }
 
     async cache(req: Request, res: Response) {
-        await cacheService.set("name", {
+        await cacheService.set("user:1", {
             id: 1,
             userId: 1,
-            title: "title 1",
+            title: "title 2",
             body: "this s a dummy conent."
         });
-        const data = await cacheService.get("name");
+        const data = await cacheService.get("user:1");
         res.json({
             status: "ok",
             data

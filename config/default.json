@@ -2,7 +2,7 @@
   "app_name": "godance@default",
   "app_port": 8787,
   "cache": {
-    "type": "memory"
+    "type": "redis"
   },
   "jwt": {
     "maxAge": 86400,

@@ -1,17 +1,20 @@
 import config from 'config';
 import MemoryCacheService from './Cache/MemoryCacheService';
 import SQLiteCacheService from './Cache/SQLiteCacheService';
-import RedisCacheService from './Cache/RedisCacheService';
 
-let memoryCache: MemoryCacheService;
-let sqliteCache: SQLiteCacheService;
-let redisCache: RedisCacheService;
+let memoryCache: ICacheService;
+let sqliteCache: ICacheService;
+let redisCache: ICacheService;
+
 export function createCacheService(): ICacheService {
+
     const cacheType = process.env.CACHE_TYPE ?? config.get<string>('cache.type');
 
     if (cacheType === 'redis') {
-        if (!redisCache)
-            redisCache = new RedisCacheService()
+        if (!redisCache) {
+            const RedisCacheService = require('./Cache/RedisCacheService')
+            redisCache = new RedisCacheService();
+        }
         return redisCache;
     }
 
