@@ -1,7 +1,7 @@
 import amqp, { Connection, Channel } from 'amqplib';
 import config from '../bootstrap/config';
 
-export class RabbitMQService {
+export class AmqpService {
     private connection!: Connection;
     private channel!: Channel;
 
@@ -55,5 +55,5 @@ export class RabbitMQService {
     }
 }
 
-const rabbitMQService = new RabbitMQService(config.get('amqp.uri'));
-export default rabbitMQService;
+const amqpService = new AmqpService(config.get('amqp.uri'));
+export default amqpService;
