@@ -61,6 +61,10 @@ class BaseSequelize<T extends Model> {
         const { rows, count } = await this.model.findAndCountAll(options);
         return { rows, count };
     }
+
+    async dropTable(): Promise<void> {
+        await this.model.drop();
+    }
 }
 
 export default BaseSequelize;

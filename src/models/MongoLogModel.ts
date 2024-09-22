@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { Document } from 'mongoose';
 
-interface ILog extends Document {
+interface IMongoLog extends Document {
     userId: number;
     level: 'info' | 'warn' | 'error' | 'debug';
     message: string;
@@ -12,7 +12,7 @@ interface ILog extends Document {
     statusCode?: number;
 }
 
-const logSchema = new Schema<ILog>({
+const mongoLogSchema = new Schema<IMongoLog>({
     userId: Number,
     level: { type: String, enum: ['info', 'warn', 'error', 'debug'] },
     message: String,
@@ -23,6 +23,6 @@ const logSchema = new Schema<ILog>({
     statusCode: Number,
 });
 
-const LogModel = mongoose.model<ILog>('Log', logSchema);
+const MongoLogModel = mongoose.model<IMongoLog>('MongoLog', mongoLogSchema);
 
-export { LogModel, ILog };
+export { MongoLogModel, IMongoLog }

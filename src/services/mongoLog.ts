@@ -1,6 +1,6 @@
 
 import BaseMongo from '../models/BaseMongo';
-import { ILog, LogModel } from '../models/LogModel';
+import { IMongoLog, MongoLogModel } from '../models/MongoLogModel';
 
-const mongoLog = new BaseMongo<ILog>(LogModel);
+const mongoLog = new BaseMongo<IMongoLog>(MongoLogModel);
 export default mongoLog;

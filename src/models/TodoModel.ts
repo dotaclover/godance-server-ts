@@ -1,15 +1,17 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
-import { getDBInstance } from '../bootstrap/database';
 import config from 'config';
+import { DataTypes, Model } from 'sequelize';
+import { getDBInstance } from '../bootstrap/database';
 
-class TodoModel extends Model {
+export class TodoModel extends Model {
     public id!: number;
     public userId!: number;
     public title!: string;
     public completed!: boolean;
 }
 
-getDBInstance().then((sequelize: Sequelize) => {
+export async function initTodoModel() {
+    const sequelize = await getDBInstance();
+
     TodoModel.init(
         {
             id: {
@@ -39,6 +41,4 @@ getDBInstance().then((sequelize: Sequelize) => {
 
     if (config.util.getEnv("NODE_ENV") === "development")
         sequelize.sync();
-})
-
-export { TodoModel }
+}

@@ -18,7 +18,7 @@
   "database": {
     "type": "mysql",
     "mysql": {
-      "database": "test",
+      "database": "test2",
       "username": "root",
       "password": "root",
       "host": "localhost",

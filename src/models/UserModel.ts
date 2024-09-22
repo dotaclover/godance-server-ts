@@ -1,8 +1,7 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { getDBInstance } from '../bootstrap/database';
-import config from 'config';
 
-class UserModel extends Model {
+export class UserModel extends Model {
     public id!: number;
     public status!: number;
     public isAdmin!: boolean;
@@ -10,7 +9,8 @@ class UserModel extends Model {
     public password!: string;
 }
 
-getDBInstance().then((sequelize: Sequelize) => {
+export async function initUserModel() {
+    const sequelize = await getDBInstance();
     UserModel.init(
         {
             id: {
@@ -45,9 +45,4 @@ getDBInstance().then((sequelize: Sequelize) => {
             sequelize,
         }
     );
-
-    if (config.util.getEnv("NODE_ENV") === "development")
-        sequelize.sync();
-})
-
-export { UserModel }
+}

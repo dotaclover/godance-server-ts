@@ -4,7 +4,8 @@ import { Sequelize } from 'sequelize';
 let connected = false;
 let sequelize: Sequelize | null = null;
 
-const connectDatabase = async (type: string = ''): Promise<Sequelize> => {
+//连接数据库
+export async function connectDatabase(type: string = ''): Promise<Sequelize> {
     if (connected) return sequelize!;
 
     const dbType = type || config.get<string>('database.type');
@@ -62,13 +63,12 @@ const connectDatabase = async (type: string = ''): Promise<Sequelize> => {
                     idle: sequelizeConfig.idle || 10000,
                 },
             });
-        } else {
+        } else
             throw new Error(`Unsupported database type: ${dbType}`);
-        }
 
-        await sequelize.sync();
+        //winston.info(`Connected to Sequelize (${dbType.toUpperCase()})`);
+
         connected = true;
-        console.log(`Connected to Sequelize (${dbType.toUpperCase()})`);
         return sequelize;
     };
 
@@ -76,29 +76,23 @@ const connectDatabase = async (type: string = ''): Promise<Sequelize> => {
 };
 
 // 关闭连接
-const closeDatabase = async () => {
+export async function closeDatabase() {
     if (connected && sequelize) {
         await sequelize.close();
+        //winston.info("Sequelize connection closed");
         connected = false;
-        console.log('Sequelize connection closed');
     }
 };
 
 // 获取当前数据库实例，如果未连接会自动重连
-const getDBInstance = async (): Promise<Sequelize> => {
-    if (!connected) {
+export async function getDBInstance(): Promise<Sequelize> {
+    if (!connected)
         await connectDatabase();
-    }
     return sequelize!;
 };
 
-// 切换数据库类型并关闭之前的连接
-const switchDatabaseType = async (newType: string): Promise<Sequelize> => {
-    // 关闭现有连接
+// 切换数据库类型，关闭之前的连接
+export async function switchDatabaseType(newType: string): Promise<Sequelize> {
     await closeDatabase();
-
-    // 使用新的数据库类型重新连接
     return connectDatabase(newType);
 };
-
-export { connectDatabase, closeDatabase, getDBInstance, switchDatabaseType };
