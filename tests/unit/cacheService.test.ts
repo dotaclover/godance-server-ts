@@ -5,7 +5,6 @@ let cacheService: ICacheService;
 
 describe('Cache Service Tests', () => {
 
-
     describe('Memory Cache Service', () => {
         beforeAll(() => {
             process.env.CACHE_TYPE = 'memory';

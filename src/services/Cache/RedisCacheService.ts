@@ -1,28 +1,22 @@
-import Redis, { RedisOptions } from 'ioredis';
+import redisService from '../redisService';
 
 class RedisCacheService implements ICacheService {
-    private client: Redis;
-
-    constructor(redisOptions: RedisOptions) {
-        this.client = new Redis(redisOptions);
-    }
 
     async get<T>(key: string): Promise<T | null> {
-        const value = await this.client.get(key);
-        return value ? JSON.parse(value) : null;
+        const value = await redisService.get(key);
+        return value as unknown as T;
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
-        const serializedValue = JSON.stringify(value);
         if (ttl) {
-            await this.client.set(key, serializedValue, 'EX', ttl);
+            await redisService.set(key, value, ttl);
         } else {
-            await this.client.set(key, serializedValue);
+            await redisService.set(key, value);
         }
     }
 
     async delete(key: string): Promise<void> {
-        await this.client.del(key);
+        await redisService.delete(key);
     }
 }
 
