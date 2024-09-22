@@ -1,10 +1,10 @@
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import config from './config';
-import logger from './logger';
-import routing from './router';
-import { connectDatabase } from './database';
+import config from './bootstrap/config';
+import logger from './bootstrap/logger';
+import routing from './bootstrap/router';
+import { connectDatabase } from './bootstrap/database';
 
 const app = express();
 app.use(express.json());

@@ -2,21 +2,19 @@
   "app_name": "godance@default",
   "app_port": 8787,
   "cache": {
-    "redis": {
-      "host": "127.0.0.1",
-      "port": 6379,
-      "db": 0
-    },
-    "sqlite": {
-      "dbPath": "writable/db.sqlite"
-    },
-    "type": "redis"
+    "type": "memory"
   },
-  "mongodb": {
-    "uri": "mongodb://127.0.0.1:27017/test"
+  "jwt": {
+    "maxAge": 86400,
+    "privateKey": "jwtPrivateKey"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "db": 0
   },
   "database": {
-    "type": "mysql",
+    "type": "sqlite",
     "mysql": {
       "database": "test2",
       "username": "root",
@@ -28,6 +26,10 @@
       "poolMin": 0,
       "acquire": 30000,
       "idle": 10000
+    },
+    "sqlite": {
+      "dialect": "sqlite",
+      "storage": "writable/db.sqlite"
     },
     "pgsql": {
       "database": "your_pgsql_db",
@@ -54,19 +56,10 @@
       "poolMin": 0,
       "acquire": 30000,
       "idle": 10000
-    },
-    "sqlite": {
-      "dialect": "sqlite",
-      "storage": "writable/db.sqlite"
-    },
-    "sqlite_memory": {
-      "dialect": "sqlite",
-      "storage": ":memory:"
     }
   },
-  "jwt": {
-    "maxAge": 86400,
-    "privateKey": "jwtPrivateKey"
+  "amqp": {
+    "uri": "amqp://guest:guest@localhost:5672/"
   },
   "elasticSearch": {
     "node": "https://localhost:9200",
@@ -75,8 +68,8 @@
       "password": "rK2Q_dwgOE6=4jJS-vZx"
     }
   },
-  "amqp": {
-    "uri": "amqp://guest:guest@localhost:5672/"
+  "mongodb": {
+    "uri": "mongodb://127.0.0.1:27017/test"
   },
   "queue": {
     "rabbitmq": {
@@ -88,10 +81,5 @@
       "db": 0
     },
     "type": "redis"
-  },
-  "redis": {
-    "host": "127.0.0.1",
-    "port": 6379,
-    "db": 0
   }
 }

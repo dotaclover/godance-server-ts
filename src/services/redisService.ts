@@ -17,6 +17,8 @@ export class RedisService {
             port: options?.port || 6379,
             db: options?.db || 0,
             password: options?.password,
+            connectTimeout: 10000,
+            keepAlive: 30000
         });
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "godance-server-ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "bootstrap/index.js",
   "dependencies": {
@@ -36,9 +36,9 @@
     "ts-node-dev": "^2.0.0"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/bootstrap/index.ts",
-    "build": "tsc --build --clean && tsc",
-    "start": "node dist/bootstrap/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc --build --clean && tsc --build",
+    "start": "node dist/index.js",
     "test": "jest"
   },
   "keywords": [],
