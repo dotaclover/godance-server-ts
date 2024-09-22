@@ -1,7 +1,7 @@
+import mongoose from 'mongoose';
 import BaseMongo from '../../src/models/BaseMongo';
 import { Document, model, Schema } from 'mongoose';
-import config from '../../src/bootstrap/config';
-import mongoose from 'mongoose';
+import { initMongoDB } from '../../src/bootstrap/mongodb';
 
 // 继承 Document
 interface TestDocument extends Document {
@@ -19,7 +19,7 @@ const TestModel = model<TestDocument>('Test', TestSchema);
 const baseMongo = new BaseMongo<TestDocument>(TestModel);
 
 beforeAll(async () => {
-  await mongoose.connect(config.get('mongodb.uri'));
+  await initMongoDB();
 });
 
 beforeEach(async ()=>{

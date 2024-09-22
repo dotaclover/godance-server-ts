@@ -2,7 +2,7 @@ import Joi from "joi";
 import config from 'config';
 import mongoose from 'mongoose';
 import { Request, Response } from "express";
-import postService from "../services/logService";
+import mongoLog from "../services/mongoLog";
 import cacheService from "../services/cacheService";
 import todoService from "../services/Logic/todoService";
 class Index {
@@ -40,8 +40,8 @@ class Index {
             title: "hello",
             completed: false
         })
-        const post = await todoService.getAll();
-        return res.json(post);
+        const todo = await todoService.getAll();
+        return res.json(todo);
     }
 
     async mongo(req: Request, res: Response) {
@@ -55,8 +55,8 @@ class Index {
             return res.status(400).send(result?.error?.details[0]?.message);
 
         const { id } = req.query;
-        const post = await postService.getById(id as string);
-        return res.json(post);
+        const log = await mongoLog.getById(id as string);
+        return res.json(log);
     }
 }
 
