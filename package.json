@@ -4,6 +4,7 @@
   "description": "",
   "main": "bootstrap/index.js",
   "dependencies": {
+    "@elastic/elasticsearch": "^8.15.0",
     "amqplib": "^0.10.4",
     "axios": "^1.7.4",
     "config": "^3.3.12",

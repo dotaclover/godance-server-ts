@@ -68,6 +68,13 @@
     "maxAge": 86400,
     "privateKey": "jwtPrivateKey"
   },
+  "elasticSearch": {
+    "node": "https://localhost:9200",
+    "auth": {
+      "username": "elastic",
+      "password": "rK2Q_dwgOE6=4jJS-vZx"
+    }
+  },
   "amqp": {
     "uri": "amqp://guest:guest@localhost:5672/"
   },
