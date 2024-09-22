@@ -44,8 +44,7 @@ describe('ElasticSearchService', () => {
     it('should insert a document', async () => {
         const response = await service.insertDocument(testIndex, testDocument);
         expect(response).toHaveProperty('result', 'created');
-        // console.log(`documentId=${response?._id}`);
-        documentId = response!._id; // Save the document ID for later tests
+        documentId = response!._id;
     });
 
     it('should search for a document', async () => {
@@ -54,15 +53,13 @@ describe('ElasticSearchService', () => {
         });
         expect(results.length).toBeGreaterThan(0);
 
-        // 将 date 字段转换为 ISO 字符串
         const expectedDocument = {
             ...testDocument,
-            date: testDocument.date.toISOString(),
+            date: testDocument.date.toISOString(),// ISO date string
         };
 
         expect(results[0]).toEqual(expect.objectContaining(expectedDocument));
     });
-
 
     it('should update a document', async () => {
         const updatedContent = { description: 'Updated description for the test document' };

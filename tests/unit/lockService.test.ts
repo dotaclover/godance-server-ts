@@ -1,4 +1,4 @@
-import lockService from '../../src/services/lockService'; // Adjust the path as needed
+import lockService from '../../src/services/lockService';
 import redisService from '../../src/services/redisService';
 
 beforeAll(async () => {
@@ -6,21 +6,21 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-    await redisService.flushDB(); // Clean up after tests
+    await redisService.flushDB();
     await redisService.disconnect();
 });
 
 describe('LockService', () => {
     const lockKey = 'test-lock';
-    const lockValue = '12345'; // Use string consistently
+    const lockValue = '12345';
     const ttl = 5; // TTL in seconds
 
     it('should acquire a lock successfully', async () => {
         const result = await lockService.acquireLock(lockKey, lockValue, ttl);
         expect(result).toBe(true);
 
-        const storedValue = String(await redisService.get<string>(lockKey));
-        expect(storedValue).toBe(lockValue); // Both lockValue and storedValue are strings
+        const storedValue = String(await redisService.getRaw(lockKey));
+        expect(storedValue).toBe(lockValue);
     });
 
     it('should not acquire a lock if it already exists', async () => {
@@ -32,7 +32,7 @@ describe('LockService', () => {
         const result = await lockService.releaseLock(lockKey, lockValue);
         expect(result).toBe(true); // Expect successful release
 
-        const storedValue = await redisService.get<string>(lockKey);
+        const storedValue = await redisService.getRaw(lockKey);
         expect(storedValue).toBeNull(); // Lock should be deleted
     });
 
@@ -42,7 +42,7 @@ describe('LockService', () => {
         const result = await lockService.releaseLock(lockKey, 'wrong-value');
         expect(result).toBe(false); // Lock should not be released
 
-        const storedValue = await redisService.get<string>(lockKey);
+        const storedValue = await redisService.getRaw(lockKey);
         expect(storedValue).toBe(lockValue); // Lock should still exist
     });
 
@@ -51,7 +51,7 @@ describe('LockService', () => {
 
         await lockService.forceRelease(lockKey);
 
-        const storedValue = await redisService.get<string>(lockKey);
+        const storedValue = await redisService.getRaw(lockKey);
         expect(storedValue).toBeNull(); // Lock should be deleted
     });
 
@@ -61,7 +61,7 @@ describe('LockService', () => {
         const result = await lockService.extendLock(lockKey, lockValue, 10);
         expect(result).toBe(true); // Lock should be extended
 
-        const storedValue = await redisService.get<string>(lockKey);
+        const storedValue = await redisService.getRaw(lockKey);
         expect(storedValue).toBe(lockValue); // Lock should still exist
     });
 

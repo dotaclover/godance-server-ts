@@ -28,11 +28,14 @@ export class RedisService {
 
         try {
             const parsedValue = JSON.parse(value);
-            return parsedValue as T ;
+            return parsedValue as T;
         } catch (error) {
-            // If JSON.parse fails, it's a primitive type (string, number, boolean)
             return value as unknown as T;
         }
+    }
+
+    async getRaw(key: string): Promise<string | null> {
+        return await this.client.get(key);
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {

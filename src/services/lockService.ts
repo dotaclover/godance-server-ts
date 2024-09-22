@@ -2,43 +2,39 @@
 import redisService from "./redisService";
 
 export class LockService {
-    // Acquire a lock with a timeout (in seconds)
+    // 先请求独占锁，再设置过期时间
     async acquireLock(lockKey: string, lockValue: string, ttl: number): Promise<boolean> {
-        // Try to set the lock using SET NX (if not exists) with expiration (EX)
         const success = await redisService.setnx(lockKey, lockValue);
         if (success) {
-            // Set the expiration for the lock
             await redisService.setex(lockKey, lockValue, ttl);
             return true;
         }
-        return false; // Lock already exists
+        return false;
     }
 
-    // Release the lock
+    // 使用lockValue释放锁
     async releaseLock(lockKey: string, lockValue: string): Promise<boolean> {
-        const currentValue = await redisService.get<string>(lockKey);
-        // Only release the lock if the lock value matches
+        const currentValue = await redisService.getRaw(lockKey);
         if (currentValue === lockValue) {
             await redisService.delete(lockKey);
             return true;
         }
-        return false; // Lock does not exist or value does not match
+        return false;
     }
 
-    // Forcefully release a lock (if needed)
+    // 强制释放锁
     async forceRelease(lockKey: string): Promise<void> {
         await redisService.delete(lockKey);
     }
 
-    // Extend lock time (useful if the process holding the lock needs more time)
+    //延长锁时间
     async extendLock(lockKey: string, lockValue: string, ttl: number): Promise<boolean> {
-        const currentValue = await redisService.get<string>(lockKey);
-        if (currentValue === lockValue) {
-            // Reset the TTL for the lock
+        const currentValue = await redisService.getRaw(lockKey);
+        if (currentValue == lockValue) {
             await redisService.setex(lockKey, lockValue, ttl);
             return true;
         }
-        return false; // Lock does not exist or value does not match
+        return false;
     }
 }
 
