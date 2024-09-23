@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import jwt from "../utils/jwt";
+import jwt from "../library/jwt";
 import userService from "../services/Logic/userService";
 
 class User {

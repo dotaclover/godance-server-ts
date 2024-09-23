@@ -1,6 +1,6 @@
 import config from 'config';
-import MemoryCacheService from './Cache/MemoryCacheService';
-import SQLiteCacheService from './Cache/SQLiteCacheService';
+import MemoryCacheService from '../library/Cache/MemoryCacheService';
+import SQLiteCacheService from '../library/Cache/SQLiteCacheService';
 
 let memoryCache: ICacheService;
 let sqliteCache: ICacheService;

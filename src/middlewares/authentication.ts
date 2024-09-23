@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "../utils/jwt";
+import jwt from "../library/jwt";
 import { User } from "../types";
 
 const authentication = function (req: Request, res: Response, next: NextFunction) {

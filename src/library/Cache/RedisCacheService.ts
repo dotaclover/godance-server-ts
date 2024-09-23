@@ -1,4 +1,4 @@
-import redisService from '../redisService';
+import redisService from '../../services/redisService';
 
 class RedisCacheService implements ICacheService {
 
